@@ -1,11 +1,12 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { TodoInput } from './components/TodoInput';
 import { TodoList } from './components/TodoList';
 import { Github, Moon, Sun } from 'lucide-react';
 import { Button } from '@/components/ui/button';
+import { useTheme } from './useTheme';
 
 const BackgroundPattern = () => (
-  <svg className="fixed inset-0 -z-10 h-full w-full stroke-[#32fd32] [mask-image:radial-gradient(100%_100%_at_top_right,white,transparent)]" aria-hidden="true">
+  <svg className="fixed inset-0 -z-10 h-full w-full stroke-primary [mask-image:radial-gradient(100%_100%_at_top_right,white,transparent)]" aria-hidden="true">
     <defs>
       <pattern
         id="pattern-squares"
@@ -23,13 +24,7 @@ const BackgroundPattern = () => (
 );
 
 function App() {
-  const [theme, setTheme] = useState('light');
-
-  const toggleTheme = () => {
-    const newTheme = theme === 'light' ? 'dark' : 'light';
-    setTheme(newTheme);
-    document.documentElement.classList.toggle('dark');
-  };
+  const { theme, toggleTheme } = useTheme();
 
   return (
     <div className="flex flex-col min-h-screen">
