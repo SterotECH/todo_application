@@ -1,4 +1,4 @@
-import { Todo } from '@/type';
+import { Todo } from '@/types';
 import { RootState } from '..';
 import { isAfter, isBefore, isToday } from 'date-fns';
 
