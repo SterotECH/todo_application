@@ -1,32 +1,41 @@
 # Todo Application
 
-A scalable and responsive Todo application built using **React.js**, **Redux**, and **Redux Persist**, demonstrating proficiency in state management, UI development, and data persistence.
+A scalable and responsive Todo application built using **React.js**, **Redux**, and **Redux Persist**, featuring an intuitive dialog-based input system, modal editing, and smart filtering capabilities.
 
 ## Features
 
-- **Add Todos**: Create new Todo items with a title and an "incomplete" status.
-- **Edit Todos**: Edit Todo titles inline with seamless state updates.
-- **Delete Todos**: Remove items from the Todo list.
-- **Toggle Completion**: Mark Todos as complete or incomplete using checkboxes.
-- **State Persistence**: Automatically saves and restores the Todo list across page reloads using **Redux Persist** and browser `localStorage`.
-- **Responsive Design**: Clean and responsive user interface built with [CSS Framework/TailwindCSS/Bootstrap].
+- **Smart Input Dialog**: Add new todos through a clean, modal dialog interface
+- **Sheet Modal Editing**: Edit todo details seamlessly using a bottom sheet modal
+- **Intelligent Filtering**: Sort todos into meaningful categories:
+  - Overdue tasks
+  - Due today
+  - Upcoming tasks
+  - Tasks without due dates
+  - Completed tasks
+- **Todo Management**:
+  - Create todos with title, body, and optonal due date
+  - Edit todo details through an intuitive sheet interface
+  - Delete todos with confirmation
+  - Mark todos as complete/incomplete
+- **State Persistence**: Automatic saving and restoration using **Redux Persist** and browser `localStorage`
+- **Responsive Design**: Clean and responsive user interface built with TailwindCSS
 
 ---
 
 ## Technologies Used
 
-- **React.js**: For building the user interface.
-- **Redux**: For managing global application state.
-- **Redux Persist**: To save the Redux state in `localStorage` and rehydrate it on reload.
-- **React Hooks**: For state and lifecycle management.
-- **CSS Framework**: TailwindCSS for styling.
-- **@reduxjs/toolkit**: For simplified Redux configuration and better developer experience.
+- **React.js**: For building the user interface
+- **Redux**: For managing global application state
+- **Redux Persist**: To save the Redux state in `localStorage`
+- **React Hooks**: For state and lifecycle management
+- **shadcn/ui**: For pre-built components (Dialog, Sheet, Tabs)
+- **TailwindCSS**: For styling and responsive design
+- **@reduxjs/toolkit**: For simplified Redux configuration
+- **date-fns**: For date manipulation and formatting
 
 ---
 
 ## Installation and Setup
-
-Follow these steps to set up the project locally:
 
 ### Prerequisites
 
@@ -60,10 +69,9 @@ Ensure you have the following installed:
    yarn start
    ```
 
-   The application will be available at [http://localhost:3000](http://localhost:3000).
+   The application will be available at [http://localhost:3000](http://localhost:3000)
 
 4. **Build for Production**
-   To create a production-ready build:
 
    ```bash
    npm run build
@@ -71,46 +79,11 @@ Ensure you have the following installed:
    yarn build
    ```
 
-5. **Run Tests (Optional)**
-   If tests are implemented:
-
-   ```bash
-   npm test
-   # OR
-   yarn test
-   ```
-
----
-
-## Hosting the Application
-
-To meet the submission requirement of hosting the application, follow these steps:
-
-1. **Deploy to Vercel**
-   - Install the Vercel CLI:
-
-     ```bash
-     npm install -g vercel
-     ```
-
-   - Deploy the app:
-
-     ```bash
-     vercel
-     ```
-
-   - Follow the prompts to upload your project.
-
-2. **Alternative: Deploy to Netlify**
-   - Login to [Netlify](https://www.netlify.com/) and create a new project.
-   - Connect your GitHub repository.
-   - Specify the build command: `npm run build` and publish directory: `build`.
-
 ---
 
 ## Folder Structure
 
-``` bash
+```bash
 todo-application/
 ├── public/
 ├── src/
@@ -129,40 +102,59 @@ todo-application/
 
 ## Application Features (Details)
 
-1. **Input Field for Adding Todos**
-   - Enter the Todo title and click the "Add" button to include it in the list.
+1. **Todo Input Dialog**
+   - Clean modal interface for adding new todos
+   - Fields for title, body, and due date
+   - Validation and error handling
 
-2. **Edit and Delete**
-   - Inline editing for titles.
-   - A "Delete" button for removing specific Todos.
+2. **Sheet Modal for Editing**
+   - Bottom sheet interface for editing todos
+   - Seamless updating of todo details
+   - Mobile-friendly design
 
-3. **Toggle Completion**
-   - Mark Todos as completed with a checkbox.
-   - Strikethrough style for completed Todos.
+3. **Smart Filtering Tabs**
+   - **Overdue**: Tasks past their due date
+   - **Due Today**: Tasks due within the current day
+   - **Upcoming**: Future tasks
+   - **No Due Date**: Tasks without specified deadlines
+   - **Completed**: Finished tasks
 
-4. **Persistent State**
-   - Todos persist across page reloads using Redux Persist.
+4. **Todo Management**
+   - Inline status toggling
+   - Delete confirmation
+   - Rich todo details including title, body, and due date
+
+5. **Persistent State**
+   - Todos persist across page reloads
+   - Redux Persist ensures state is saved
+   - Browser `localStorage` used for persistence
 
 ---
 
 ## Known Issues
 
-- [Add any known issues or edge cases you've handled.]
+- Sheet modal might have scrolling issues on some mobile browsers
+- Date picker compatibility varies across browsers
+- Filter tabs might overflow on very small screens
 
 ---
 
 ## Future Enhancements
 
-- Add support for due dates.
-- Implement user authentication for syncing Todos across devices.
-- Allow filtering Todos (e.g., completed, pending).
+- Add support for recurring todos
+- Implement user authentication
+- Add priority levels
+- Enable todo categorization/tagging
+- Add sorting options within filters
+- Implement drag-and-drop reordering
+- Add support for attachments
 
 ---
 
 ## Deployment Links
 
-- **GitHub Repository**: [https://github.com/sterotech/todo-application](https://github.com/sterotech/todo-application)
-- **Hosted Application**: [https://<your-hosted-app-url>](https://<your-hosted-app-url>)
+- **GitHub Repository**: [Github](https://github.com/sterotech/todo-application)
+- **Hosted Application**: [Vercel](https://todo-application-5fnqwtii7-sterotechs-projects.vercel.app/)
 
 ---
 
@@ -170,8 +162,7 @@ todo-application/
 
 **Samuel Agyei**
 
-- [GitHub Profile](https://github.com/<your-github-username>)
-- [LinkedIn Profile](https://linkedin.com/in/<your-linkedin-username>)
+- [GitHub Profile](https://github.com/sterotech)
 
 ---
 
