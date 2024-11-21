@@ -3,9 +3,12 @@ import storage from "redux-persist/lib/storage";
 import { persistReducer } from "redux-persist";
 import { Todo } from "@/type";
 
+
+
 interface TodoState {
-  items: Todo[];
+  todos: Todo[];
 }
+
 
 const sortTodos = (todos: Todo[]): Todo[] => {
   return [...todos].sort((a, b) => {
@@ -21,14 +24,16 @@ const sortTodos = (todos: Todo[]): Todo[] => {
     return new Date(b.dueDate).getTime() - new Date(a.dueDate).getTime();
   });
 };
+
+
 const todoSlice = createSlice({
   name: 'todo',
   initialState: {
-    items: [] as Todo[],
+    todos: [] as Todo[],
   } as TodoState,
   reducers: {
     addTodo: (state, action) => {
-      state.items.push({
+      state.todos.push({
         id: Date.now(),
         title: action.payload.title,
         body: action.payload.body,
@@ -38,38 +43,38 @@ const todoSlice = createSlice({
         createdAt: new Date(),
         updatedAt: new Date(),
       });
-      state.items = sortTodos(state.items);
+      state.todos = sortTodos(state.todos);
     },
 
     toggleTodo: (state, action: PayloadAction<number>) => {
-      const todo = state.items.find(todo => todo.id === action.payload);
+      const todo = state.todos.find(todo => todo.id === action.payload);
       if (todo) {
         todo.completed = !todo.completed;
         todo.updatedAt = new Date();
-        state.items = sortTodos(state.items);
+        state.todos = sortTodos(state.todos);
       }
     },
 
     deleteTodo: (state, action: PayloadAction<number>) => {
-      state.items = state.items.filter(todo => todo.id !== action.payload);
+      state.todos = state.todos.filter(todo => todo.id !== action.payload);
     },
 
     startEditTodo: (state, action: PayloadAction<number>) => {
-      const todo = state.items.find(todo => todo.id === action.payload);
+      const todo = state.todos.find(todo => todo.id === action.payload);
       if (todo) {
         todo.isEditing = true;
       }
     },
 
     cancelEditTodo: (state, action: PayloadAction<number>) => {
-      const todo = state.items.find(todo => todo.id === action.payload);
+      const todo = state.todos.find(todo => todo.id === action.payload);
       if (todo) {
         todo.isEditing = false;
       }
     },
 
     updateTodo: (state, action) => {
-      const todo = state.items.find(todo => todo.id === action.payload.id);
+      const todo = state.todos.find(todo => todo.id === action.payload.id);
       if (todo) {
         todo.title = action.payload.title;
         todo.body = action.payload.body;
@@ -77,7 +82,7 @@ const todoSlice = createSlice({
         todo.updatedAt = new Date();
         todo.isEditing = false;
 
-        state.items = sortTodos(state.items);
+        state.todos = sortTodos(state.todos);
       }
     }
   },
@@ -90,7 +95,7 @@ const persistConfig = {
     in: (todo: TodoState) => {
       return {
         ...todo,
-        items: todo.items.map((item) => ({
+        todos: todo.todos.map((item) => ({
           ...item,
           createdAt: item.createdAt.toISOString(),
           updatedAt: item.updatedAt.toISOString(),
@@ -103,7 +108,7 @@ const persistConfig = {
     out: (state: TodoState) => {
       return {
         ...state,
-        items: state.items.map((item) => ({
+        todos: state.todos.map((item) => ({
           ...item,
           createdAt: new Date(item.createdAt),
           updatedAt: new Date(item.updatedAt),

@@ -1,12 +1,11 @@
-import React from 'react';
 import { TodoInput } from './components/TodoInput';
 import { TodoList } from './components/TodoList';
 import { Github, Moon, Sun } from 'lucide-react';
 import { Button } from '@/components/ui/button';
-import { useTheme } from './useTheme';
+import { useTheme } from './hooks';
 
 const BackgroundPattern = () => (
-  <svg className="fixed inset-0 -z-10 h-full w-full stroke-primary [mask-image:radial-gradient(100%_100%_at_top_right,white,transparent)]" aria-hidden="true">
+  <svg className="fixed inset-0 -z-10 h-full w-full stroke-primary/50 [mask-image:radial-gradient(100%_100%_at_top_right,white,transparent)]" aria-hidden="true">
     <defs>
       <pattern
         id="pattern-squares"

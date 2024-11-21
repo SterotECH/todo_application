@@ -1,4 +1,3 @@
-import React from "react";
 import { useAppDispatch } from "@/hooks";
 import { deleteTodo, toggleTodo, updateTodo } from "@/store/todo/todoSlice";
 import { Todo } from "@/type";
@@ -32,7 +31,7 @@ export const TodoItem = ({ todo }: { todo: Todo }) => {
         className={cn(
           "mb-4 hover:shadow-md transition-shadow duration-300",
           todo.dueDate && !todo.completed && isBefore(todo.dueDate, new Date()) &&
-          "border-red-200 bg-red-50"
+          "border-destructive bg-destructive"
         )}
       >
         <CardContent className="pt-6">

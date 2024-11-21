@@ -1,4 +1,3 @@
-import React from "react";
 import { Todo } from "@/type";
 import { TimeStatus } from "./TimeStatus";
 

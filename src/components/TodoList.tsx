@@ -4,14 +4,14 @@ import { RootState } from '@/store';
 import { isAfter, isBefore, isToday } from 'date-fns';
 import { Tabs, TabsContent, TabsList } from '@/components/ui/tabs';
 import { TodoItem } from './TodoItem';
-import { Calendar, CheckCircle2, Clock, AlertCircle, ListTodo } from 'lucide-react';
 import { EmptyState } from './EmptyState';
 import { TabTriggerWithBadge } from './TabTriggerWithBadge';
 import { TabEmptyState } from './TabEmptyState';
+import { AlertCircle, ListTodo , AlertTriangle, Calendar, Clock, CheckCircle2, HelpCircle } from 'lucide-react';
 
 
 export const TodoList = () => {
-  const todos = useAppSelector((state: RootState) => state.todos.items);
+  const todos = useAppSelector((state: RootState) => state.todos.todos);
 
   const categorizedTodos = React.useMemo(() => {
     const now = new Date();
@@ -63,34 +63,39 @@ export const TodoList = () => {
 
   return (
     <Tabs defaultValue={defaultTab} className="w-full">
-      <TabsList className="justify-start w-full mb-6 ">
+      <TabsList className="justify-start w-full mb-6">
         <TabTriggerWithBadge
           value="overdue"
           label="Overdue"
           count={categorizedTodos.overdue.length}
           variant="destructive"
+          icon={AlertTriangle}
         />
         <TabTriggerWithBadge
           value="dueToday"
           label="Due Today"
           count={categorizedTodos.dueToday.length}
           variant="secondary"
+          icon={Clock}
         />
         <TabTriggerWithBadge
           value="upcoming"
           label="Upcoming"
           count={categorizedTodos.upcoming.length}
+          icon={Calendar}
         />
         <TabTriggerWithBadge
           value="noDueDate"
           label="No Due Date"
           count={categorizedTodos.noDueDate.length}
+          icon={HelpCircle}
         />
         <TabTriggerWithBadge
           value="completed"
           label="Completed"
           count={categorizedTodos.completed.length}
           variant="secondary"
+          icon={CheckCircle2}
         />
       </TabsList>
 
