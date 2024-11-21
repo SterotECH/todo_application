@@ -154,7 +154,7 @@ todo-application/
 ## Deployment Links
 
 - **GitHub Repository**: [Github](https://github.com/sterotech/todo-application)
-- **Hosted Application**: [Vercel](https://todo-application-5fnqwtii7-sterotechs-projects.vercel.app/)
+- **Hosted Application**: [Vercel](https://todo-application-sterotechs-projects.vercel.app/)
 
 ---
 
