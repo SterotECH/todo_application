@@ -3,6 +3,7 @@ import { TodoList } from './components/TodoList';
 import { Github, Moon, Sun } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { useTheme } from './hooks';
+import { Toaster } from './components/ui/sonner';
 
 const BackgroundPattern = () => (
   <svg className="fixed inset-0 -z-10 h-full w-full stroke-primary/50 [mask-image:radial-gradient(100%_100%_at_top_right,white,transparent)]" aria-hidden="true">
@@ -83,6 +84,7 @@ function App() {
           </div>
         </div>
       </footer>
+      <Toaster />
     </div>
   );
 }

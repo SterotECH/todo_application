@@ -1,6 +1,7 @@
+import React from 'react';
 import { useAppDispatch } from "@/hooks";
 import { deleteTodo, toggleTodo, updateTodo } from "@/store/todo/todoSlice";
-import { Todo } from "@/type";
+import { Todo } from "@/types";
 import { Card, CardContent, CardFooter } from "./ui/card";
 import { cn } from "@/lib/utils";
 import { isBefore } from "date-fns";
@@ -9,48 +10,87 @@ import { TodoContent } from "./TodoContent";
 import { EditTodoSheet } from "./EditTodoSheet";
 import { DeleteConfirmationDialog } from "./DeleteConfirmation";
 
-export const TodoItem = ({ todo }: { todo: Todo }) => {
+/**
+ * Props interface for the TodoItem component
+ */
+interface TodoItemProps {
+  todo: Todo;
+}
+
+/**
+ * TodoItem component represents an individual todo item
+ * with toggle, edit, and delete functionality
+ */
+export const TodoItem: React.FC<TodoItemProps> = React.memo(({ todo }) => {
   const dispatch = useAppDispatch();
 
-  const handleUpdate = (title: string, description: string, dueDate?: Date) => {
+  /**
+   * Handles updating a todo item with new title, body, and optional due date
+   */
+  const handleUpdate = React.useCallback((title: string, body: string, dueDate?: Date) => {
     dispatch(updateTodo({
       id: todo.id,
       title,
-      description,
+      body,
       dueDate
     }));
-  };
+  }, [dispatch, todo.id]);
 
-  const handleDelete = () => {
+  /**
+   * Handles deleting the current todo item
+   */
+  const handleDelete = React.useCallback(() => {
     dispatch(deleteTodo(todo.id));
-  };
+  }, [dispatch, todo.id]);
+
+  /**
+   * Handles toggling the completed status of the todo item
+   */
+  const handleToggle = React.useCallback(() => {
+    dispatch(toggleTodo(todo.id));
+  }, [dispatch, todo.id]);
+
+  /**
+   * Determines if the todo item is overdue
+   * An item is overdue if it has a due date, is not completed,
+   * and the due date is before the current date
+   */
+  const isOverdue = React.useMemo(() =>
+    todo.dueDate && !todo.completed && isBefore(todo.dueDate, new Date()),
+    [todo.dueDate, todo.completed]
+  );
 
   return (
-    <div className="transition-all duration-300 ease-in-out transform">
-      <Card
-        className={cn(
-          "mb-4 hover:shadow-md transition-shadow duration-300",
-          todo.dueDate && !todo.completed && isBefore(todo.dueDate, new Date()) &&
-          "border-destructive bg-destructive"
+    <Card
+      className={cn(
+        "w-full mb-2 relative",
+        todo.completed && "opacity-50",
+        isOverdue && "border-red-500"
+      )}
+    >
+      <CardContent className="flex items-center p-4 space-x-4">
+        <Checkbox
+          checked={todo.completed}
+          onCheckedChange={handleToggle}
+          className="mr-2"
+        />
+        <TodoContent
+        todo={todo}
+        />
+      </CardContent>
+      <CardFooter className="flex justify-end p-2 space-x-2">
+        {!todo.completed && (
+          <EditTodoSheet
+            todo={todo}
+            onUpdate={handleUpdate}
+          />
         )}
-      >
-        <CardContent className="pt-6">
-          <div className="flex items-start gap-4">
-            <div className="transition-transform duration-200 hover:scale-110">
-              <Checkbox
-                checked={todo.completed}
-                onCheckedChange={() => dispatch(toggleTodo(todo.id))}
-                className="mt-1"
-              />
-            </div>
-            <TodoContent todo={todo} />
-          </div>
-        </CardContent>
-        <CardFooter className="justify-end space-x-2">
-          {!todo.completed && <EditTodoSheet todo={todo} onUpdate={handleUpdate} />}
-          <DeleteConfirmationDialog onConfirm={handleDelete} />
-        </CardFooter>
-      </Card>
-    </div>
+        <DeleteConfirmationDialog
+          onConfirm={handleDelete}
+        />
+      </CardFooter>
+    </Card>
   );
-};
+});
+
+TodoItem.displayName = 'TodoItem';

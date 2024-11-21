@@ -1,7 +1,16 @@
 import { configureStore } from '@reduxjs/toolkit';
-import { Todo } from '@/type';
+import { Todo } from '@/types';
 import { describe, test, expect, beforeEach } from '@jest/globals';
-import { addTodo, cancelEditTodo, deleteTodo, persistedTodoReducer, startEditTodo, toggleTodo, updateTodo } from './todoSlice';
+import {
+  addTodo,
+  cancelEditTodo,
+  deleteTodo,
+  persistedTodoReducer,
+  startEditTodo,
+  toggleTodo,
+  updateTodo
+} from './todoSlice';
+
 
 const createTestStore = () => {
   return configureStore({
